@@ -1,0 +1,72 @@
+---
+import { Markdown } from "astro/components"
+
+const markdown = `${"```js"}
+console.log("Hello, world")
+${"```"}
+`
+
+const fetched = Astro.fetchContent("../test.md")
+console.log(fetched)
+---
+<p>
+ This exmaple shows the inconsistent rendering of code blocks in Markdown with Astro.
+</p>
+
+<p>
+    
+</p>
+<div>
+  <h1>Inline Markdown in <code>&lt;Markdown&gt;</code> component</h1>
+  <Markdown>
+  ```js
+  console.log("Hello, world")
+  ```
+  </Markdown>
+</div>
+
+<div>
+  <h1>Markdown passed in <code>content</code> prop in <code>&lt;Markdown&gt;</code> component</h1>
+  <Markdown content={markdown}></Markdown>
+</div>
+
+<div>
+  <h1>Markdown parsed by <code>Astro.fetchContent</code>, accessed with <code>fetched.astro.html</code></h1>
+  {fetched[0].astro.html}
+</div>
+
+<div>
+  <h1>Markdown in <code>.md</code> files</h1>
+  <iframe src="test"></iframe>
+</div>
+
+<style>
+h1 {
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+}
+div {
+  border: 1px solid gray;
+  margin: 24px;
+  padding: 12px;
+}
+
+div.ok {
+  background-color: #ccffcc;
+}
+
+div.fail {
+  background-color: #ffcccc;
+}
+</style>
+
+<script>
+  for (const div of document.querySelectorAll("div")) {
+    if (div.querySelector("iframe") !== null) {
+      continue
+    }
+    const hasToken = !!div.querySelector(".token")
+
+    div.classList.add(hasToken ? "ok" : "fail")
+  }
+</script>
