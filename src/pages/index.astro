@@ -7,8 +7,31 @@ ${"```"}
 `
 
 const fetched = Astro.fetchContent("../test.md")
-console.log(fetched)
 ---
+<html>
+<head>
+<style>
+h1 {
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+}
+div {
+  border: 1px solid gray;
+  margin: 24px;
+  padding: 12px;
+}
+
+div.ok {
+  background-color: #ccffcc;
+}
+
+div.fail {
+  background-color: #ffcccc;
+}
+</style>
+</head>
+<body>
+
 <p>
  This exmaple shows the inconsistent rendering of code blocks in Markdown with Astro.
 </p>
@@ -40,26 +63,6 @@ console.log(fetched)
   <iframe src="test"></iframe>
 </div>
 
-<style>
-h1 {
-  font-size: 1.2rem;
-  margin-bottom: 12px;
-}
-div {
-  border: 1px solid gray;
-  margin: 24px;
-  padding: 12px;
-}
-
-div.ok {
-  background-color: #ccffcc;
-}
-
-div.fail {
-  background-color: #ffcccc;
-}
-</style>
-
 <script>
   for (const div of document.querySelectorAll("div")) {
     if (div.querySelector("iframe") !== null) {
@@ -70,3 +73,5 @@ div.fail {
     div.classList.add(hasToken ? "ok" : "fail")
   }
 </script>
+</body>
+</html>

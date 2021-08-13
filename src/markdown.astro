@@ -1,12 +1,5 @@
----
----
 <html>
-<body>
-  <div>
-    <slot />
-  </div>
-</body>
-
+<head>
 <style>
 h1 {
   font-size: 1.2rem;
@@ -26,6 +19,13 @@ div.fail {
   background-color: #ffcccc;
 }
 </style>
+</head>
+<body>
+  <div>
+    <slot />
+  </div>
+</body>
+
 
 <script>
   for (const div of document.querySelectorAll("div")) {
